@@ -4,6 +4,7 @@ import '../styles/globals.css';
 import { RootLayoutProps } from '@/domain/types/types';
 import { spaceGrotesk } from '../../../public/fonts/fonts';
 import { NextIntlClientProvider } from 'next-intl';
+import Providers from '../Theme/Providers';
 
 export const metadata: Metadata = {
   title: 'Symon Dashboard',
@@ -35,7 +36,7 @@ export default async function LocaleLayout({
           locale={locale}
           messages={messages}
         >
-          {children}
+          <Providers>{children}</Providers>
         </NextIntlClientProvider>
       </body>
     </html>
