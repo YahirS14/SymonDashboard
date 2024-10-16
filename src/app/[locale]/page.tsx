@@ -1,13 +1,13 @@
 import { useTranslations } from 'next-intl';
 import ThemeSwitch from '../Theme/ThemeSwitch';
+import Header from '../components/Header';
 
 export default function Home() {
   const t = useTranslations('Index');
 
   return (
     <>
-      <h1>{t('tittle')}</h1>
-      <ThemeSwitch />
+      <Header />
     </>
   );
 }

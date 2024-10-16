@@ -17,13 +17,10 @@ export default async function LocaleLayout({
 }: Readonly<RootLayoutProps>) {
   let messages;
   try {
-    messages = (
-      await import(`../../../public/messages/${locale}.json`)
-    ).default;
+    messages = (await import(`../../../public/messages/${locale}.json`))
+      .default;
   } catch (error) {
-    console.error(
-      `No se puedieron cargar los mensajes para locale: ${locale}`
-    );
+    console.error(`No se puedieron cargar los mensajes para locale: ${locale}`);
     error;
     messages = {};
   }
@@ -31,11 +28,10 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <title>SYMON</title>
-      <body className={`${spaceGrotesk.className} antialiased`}>
-        <NextIntlClientProvider
-          locale={locale}
-          messages={messages}
-        >
+      <body
+        className={`${spaceGrotesk.className} antialiased bg-principalBrightColor dark:bg-principalDarkColor text-principalDarkColor dark:text-principalBrightColor`}
+      >
+        <NextIntlClientProvider locale={locale} messages={messages}>
           <Providers>{children}</Providers>
         </NextIntlClientProvider>
       </body>
