@@ -1,8 +1,9 @@
 'use client';
 
-import { FiSun, FiMoon } from 'react-icons/fi';
-import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
+import { MoonIcon } from '../svg/MoonIcon';
+import { SunIcon } from '../svg/SunIcon';
 
 function ThemeSwitch() {
   const [mounted, setMounted] = useState(false);
@@ -19,8 +20,11 @@ function ThemeSwitch() {
   }
 
   return (
-    <div onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}>
-      {resolvedTheme === 'dark' ? <FiSun /> : <FiMoon />}
+    <div
+      className="cursor-pointer"
+      onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+    >
+      {resolvedTheme === 'dark' ? <SunIcon /> : <MoonIcon />}
     </div>
   );
 }

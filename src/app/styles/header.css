@@ -1,56 +1,15 @@
-header {
+.image-container {
+  width: 600px;
+  height: 100vh;
+  /* Ajusta la altura según sea necesario */
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  position: relative;
-  min-height: 100vh;
+  justify-content: start;
+  background-image: url('/img/header.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  transform: rotate(12deg);
 }
 
-header h1 {
-  font-size: 48px; /* Tamaño grande para el título */
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-header h3 {
-  font-size: 24px; /* Tamaño mediano para el subtítulo */
-  font-weight: bold;
-  text-transform: uppercase;
-  margin-top: 10px;
-}
-
-header p {
-  font-size: 18px; /* Tamaño para el párrafo */
-  margin-top: 20px;
-}
-
-header button {
-  background-color: #2c2c2c; /* Color oscuro para el botón */
-  color: #fff; /* Texto blanco */
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  margin-top: 20px;
-  transition: all 0.3s ease;
-}
-
-header button:hover {
-  background-color: #fff; /* Cambio de color al pasar el mouse */
-  color: #2c2c2c;
-  transform: scale(1.05); /* Efecto de agrandamiento */
-}
-
-
-.contenedor {
-  position: relative;
-  overflow: hidden;
-}
-
-.img-esquina {
-  position: absolute;
-  bottom: 10px; /* Ajusta este valor para mover la imagen más arriba */
-  right: 0; 
-  width: 200px; /* Ajusta el tamaño según necesites */
-  height: auto;
+.image-container .dark{
+  background-image: url('/img/header-dark.png');
 }
