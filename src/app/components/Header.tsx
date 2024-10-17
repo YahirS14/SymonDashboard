@@ -1,69 +1,58 @@
-import Link from 'next/link';
-import ThemeSwitch from '../Theme/ThemeSwitch';
-import '../styles/header.css';
+'use client';
 
-import 'animate.css';
 import { useTranslations } from 'next-intl';
+import React, { useEffect, useState } from 'react';
 
 function Header() {
   const t = useTranslations('Index');
 
+  const [imgSrc, setImgSrc] = useState('/img/header.png');
+
+  useEffect(() => {
+    const htmlElement = document.documentElement;
+
+    const updateImageSrc = () => {
+      const isDarkMode = htmlElement.classList.contains('dark');
+      setImgSrc(
+        isDarkMode ? '/img/header-dark.png' : '/img/header.png'
+      );
+    };
+
+    // Initial check
+    updateImageSrc();
+
+    // Create a MutationObserver to watch for changes in the class attribute
+    const observer = new MutationObserver(updateImageSrc);
+
+    observer.observe(htmlElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+
+    // Cleanup observer on component unmount
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <>
-      <header className="h-screen">
-        <section className="flex flex-col justify-center">
-          <div className="flex justify-between p-6 items-center bg-principalBrightColor dark:bg-principalDarkColor">
-            <div className="animate__animated animate__fadeInLeft">
-              <Link href="/">
-                <h1 className="text-3xl">SYMON</h1>
-              </Link>
-            </div>
-
-            <nav className="flex items-center gap-9 animate__animated animate__backInDown p-3">
-              <Link href="/">Inicio</Link>
-              <Link href="/">Nosostors</Link>
-              <Link href="/">Contactanos</Link>
-            </nav>
-
-            <div className="flex items-center gap-4 animate__animated animate__fadeInRight">
-              <ThemeSwitch />
-              <Link href="/">Sign In</Link>
-              <Link
-                href="/"
-                className="bg-secondDarkColor rounded p-2 text-darkFont bg-"
-              >
-                Get Started
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <div className="indexBackground">
-            <div className="animated-stars">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </div>
-
-          <div className="p-14 flex flex-col justify-center items-end h-screen text-principalBrightColor">
-            <h1 className="text-right text-5xl">{t('tittle')}</h1>
-            <p className="text-right mt-2">{t('slogan')}</p>
-            <Link
-              href="/"
-              className="rounded p-2 self-end transition-all duration-1000 ease-in-out mt-2"
-            >
-              {t('button')}
-            </Link>
-          </div>
-        </section>
-      </header>
-    </>
+    <header className='relative w-full flex justify-between items-center p-12'>
+      <div className='text-left relative max-w-2xl p-'>
+        <h1 className='text-6xl font-extrabold tracking-widest uppercase'>
+          {t('title')}
+        </h1>
+        <h3 className='mt-2 text-3xl font-extrabold uppercase'>
+          {t('description')}
+        </h3>
+        <p className='mt-4 max-w-md text-lg text-left'>
+          {t('slogan')}
+        </p>
+        <button className='mt-6 px-6 py-3 bg-bunker-300 dark:bg-bunker-800 rounded-lg transition duration-1000 ease-in-out hover:bg-bunker-600 hover:text-bunker-100 dark:hover:bg-bunker-100 dark:hover:text-bunker-950 hover:scale-105 hover:shadow-lg'>
+          {t('button')}
+        </button>
+      </div>
+      <div className='w-[600px] flex justify-start'>
+        <img src={imgSrc} alt='header' className='rotate-12' />
+      </div>
+    </header>
   );
 }
 

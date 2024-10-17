@@ -5,6 +5,7 @@ import { RootLayoutProps } from '@/domain/types/types';
 import { spaceGrotesk } from '../../../public/fonts/fonts';
 import { NextIntlClientProvider } from 'next-intl';
 import Providers from '../Theme/Providers';
+import Nav from '../components/Nav';
 
 export const metadata: Metadata = {
   title: 'Symon Dashboard',
@@ -17,10 +18,13 @@ export default async function LocaleLayout({
 }: Readonly<RootLayoutProps>) {
   let messages;
   try {
-    messages = (await import(`../../../public/messages/${locale}.json`))
-      .default;
+    messages = (
+      await import(`../../../public/messages/${locale}.json`)
+    ).default;
   } catch (error) {
-    console.error(`No se puedieron cargar los mensajes para locale: ${locale}`);
+    console.error(
+      `No se puedieron cargar los mensajes para locale: ${locale}`
+    );
     error;
     messages = {};
   }
@@ -29,10 +33,16 @@ export default async function LocaleLayout({
     <html lang={locale} suppressHydrationWarning>
       <title>SYMON</title>
       <body
-        className={`${spaceGrotesk.className} antialiased bg-principalBrightColor dark:bg-principalDarkColor text-principalDarkColor dark:text-principalBrightColor`}
+        className={`${spaceGrotesk.className} antialiased bg-bunker-100 dark:bg-bunker-950 text-bunker-950 dark:text-bunker-100`}
       >
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <Providers>{children}</Providers>
+        <NextIntlClientProvider
+          locale={locale}
+          messages={messages}
+        >
+          <Providers>
+            <Nav />
+            {children}
+          </Providers>
         </NextIntlClientProvider>
       </body>
     </html>
